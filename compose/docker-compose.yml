@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  asterisk:
+    container_name: asterisk
+    image: christoofar/asterisk
+    ports:
+     - "192.168.1.29:5060:5060/udp"
+     - "192.168.1.29:5060:5060/tcp"
+     - "192.168.1.29:5061:5061"
+     - "192.168.1.29:10000-10099:10000-10099/udp"
+     - "192.168.1.29:8088:8088" #built in asterisk http server
+     - "192.168.1.29:8089:8089" #ssl,wss,webrtc
+    volumes:
+     - "/etc/asterisk:/etc/asterisk"
+     - "/var/lib/asterisk:/var/lib/asterisk"
+     - "/var/spool/asterisk:/var/spool/asterisk"
+    networks:
+      default:
+        ipv4_address: 10.1.2.10
+    group_add:
+      - 1001
+      - 20
+      - 29
+    tty: true
+
+networks:
+  default:
+    ipam:
+      config:
+       - subnet: 10.1.2.0/24
