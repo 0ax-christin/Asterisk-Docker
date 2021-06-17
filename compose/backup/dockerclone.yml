@@ -1,0 +1,18 @@
+version:
+services:
+  asterisk:
+    image:
+    ports:
+     - ""
+    volume:
+     - ""
+    networks:
+      default:
+        ipv4_address:
+
+
+networks:
+  default:
+    ipam:
+      config:
+       - subnet:
